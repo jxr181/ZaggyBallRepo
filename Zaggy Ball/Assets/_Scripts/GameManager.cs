@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         ScoreHandler.instance.OnGameOver();
         UIManager.instance.GameOver();
+        UnityAdManager.instance.ShowAd();
         gameOver = true;
     }
 
