@@ -7,7 +7,7 @@ using UnityEngine.Advertisements;
 public class UnityAdManager : MonoBehaviour 
 {
 
-
+    static int loadcount = 0;
 
     public static UnityAdManager instance;
 
@@ -28,10 +28,21 @@ public class UnityAdManager : MonoBehaviour
 
     void Start () 
 	{
-        
+        if (loadcount % 3 == 0)
+        {
+            ShowAd();
+        }
+
+        loadcount++;
 	}
 
-	
+	public void ShowAd()
+    {
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show();
+        }
+    }
 	
 	// Update is called once per frame
 	
@@ -41,29 +52,29 @@ public class UnityAdManager : MonoBehaviour
 			
 	}
 
-    public void ShowAd()
-    {
+    //public void ShowAd()
+    //{
 
-        if (PlayerPrefs.HasKey("Adcount"))
-        {
-            if (PlayerPrefs.GetInt("Adcount") == 3)
-            {
-                if (Advertisement.IsReady("video"))
-                {
-                    Advertisement.Show("video");
-                }
-                PlayerPrefs.SetInt("Adcount", 0);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("Adcount", PlayerPrefs.GetInt("Adcount") + 1);
-            }
-        }
-        else
-        {
-            PlayerPrefs.SetInt("Adcount", 0);
-        }
-    }
+    //    if (PlayerPrefs.HasKey("Adcount"))
+    //    {
+    //        if (PlayerPrefs.GetInt("Adcount") >= 3)
+    //        {
+    //            if (Advertisement.IsReady("video"))
+    //            {
+    //                Advertisement.Show("video");
+    //            }
+    //            PlayerPrefs.SetInt("Adcount", 0);
+    //        }
+    //        else
+    //        {
+    //            PlayerPrefs.SetInt("Adcount", PlayerPrefs.GetInt("Adcount") + 1);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        PlayerPrefs.SetInt("Adcount", 0);
+    //    }
+    //}
 
 
 }

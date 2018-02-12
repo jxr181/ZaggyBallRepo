@@ -9,16 +9,16 @@ public class BallController : MonoBehaviour
     [SerializeField] float speed = 10f;
     public GameObject collectedPart;
 
-
     // Private Variables
     Rigidbody rigidbody;
     private bool started;
     private bool gameOver;
+    private AudioSource pickUp;
 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
-        
+        pickUp = GetComponent<AudioSource>();
     }
 
     void Start () 
@@ -79,6 +79,7 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.tag == "Diamond")
         {
+            pickUp.Play();
             GameObject part = Instantiate(collectedPart, transform.position, Quaternion.identity) as GameObject;
             Destroy(other.gameObject);
             Destroy(part, 1f);

@@ -324,6 +324,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Scripts\AppLovinAdManager.cs" />
     <Compile Include="Assets\_Scripts\BallController.cs" />
     <Compile Include="Assets\_Scripts\CameraFollow.cs" />
     <Compile Include="Assets\_Scripts\CollisionHandler.cs" />

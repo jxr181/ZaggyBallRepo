@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
     void Start () 
 	{
-        gameOver = false;
 			
 	}
 
@@ -39,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        gameOver = false;
         UIManager.instance.GameStart();
         GameObject.Find("PlatformSpawner").GetComponent<PlatformGenerater>().StartPlatformSpawn();
         ScoreHandler.instance.TrackScore();
@@ -46,10 +46,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        ScoreHandler.instance.OnGameOver();
         UIManager.instance.GameOver();
-        UnityAdManager.instance.ShowAd();
+        ScoreHandler.instance.OnGameOver();
         gameOver = true;
+        //UnityAdManager.instance.ShowAd();
     }
 
 
