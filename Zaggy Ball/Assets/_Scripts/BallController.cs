@@ -31,17 +31,22 @@ public class BallController : MonoBehaviour
 	
 	// Update is called once per frame
 	
-	void Update () 
-	{
+	void Update ()
+    {
+        StartGame();
+    }
+
+    public void StartGame()
+    {
         if (!started)
         {
             if (Input.GetMouseButtonDown(0) && !gameOver)
             {
                 rigidbody.velocity = new Vector3(speed, 0, 0);
                 started = true;
-                
+
                 GameManager.instance.StartGame();
-            } 
+            }
         }
 
         if (!Physics.Raycast(rigidbody.position, Vector3.down, 1f))
@@ -61,7 +66,7 @@ public class BallController : MonoBehaviour
             ScoreHandler.instance.TrackScore();
             UIManager.instance.UpdateScore();
         }
-	}
+    }
 
     void SwitchDirection()
     {

@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject titlePanel;
     public GameObject gameOverPanel;
     public GameObject tapToPlayText;
+    public Toggle muteToggle;
     public Text scoreText;
     public Text highScore1;
     public Text highScore2;
@@ -53,6 +54,11 @@ public class UIManager : MonoBehaviour
         scoreText.text = PlayerPrefs.GetInt("score").ToString();
         highScore2.text = PlayerPrefs.GetInt("highScore").ToString();
         gameOverPanel.SetActive(true);
+    }
+
+    public void MuteAudio()
+    {
+        AudioListener.pause = !AudioListener.pause;
     }
 
     public void Reset()
