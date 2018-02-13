@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class BallController : MonoBehaviour 
@@ -40,12 +41,17 @@ public class BallController : MonoBehaviour
     {
         if (!started)
         {
-            if (Input.GetMouseButtonDown(0) && !gameOver)
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                rigidbody.velocity = new Vector3(speed, 0, 0);
-                started = true;
+                int pointerID = Input.GetTouch(0).fingerId;
 
-                GameManager.instance.StartGame();
+                if (!EventSystem.current.IsPointerOverGameObject(pointerID))
+                {
+                    rigidbody.velocity = new Vector3(speed, 0, 0);
+                    started = true;
+
+                    GameManager.instance.StartGame(); 
+                }
             }
         }
 
