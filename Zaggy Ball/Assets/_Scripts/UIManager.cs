@@ -11,16 +11,17 @@ public class UIManager : MonoBehaviour
     public GameObject titlePanel;
     public GameObject gameOverPanel;
     public GameObject tapToPlayText;
-    public Toggle muteToggle;
     public Text scoreText;
     public Text highScore1;
     public Text highScore2;
+    public Text diamondCountText;
 
 
     public static UIManager instance;
 
     // Private Variables
     private int score = 0;
+    private int diamondCount = 0;
 
     void Awake()
     {
@@ -28,6 +29,8 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
+
+        diamondCountText.text = "x " + diamondCount;
     }
 
     
@@ -44,6 +47,12 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: " + score;
         highScore1.text = PlayerPrefs.GetInt("score").ToString();
 
+    }
+
+    public void DiamondCounter()
+    {
+        diamondCount += 1;
+        diamondCountText.text = "X " + diamondCount;
     }
 
     public void GameOver()

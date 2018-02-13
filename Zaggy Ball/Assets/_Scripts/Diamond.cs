@@ -20,6 +20,7 @@ public class Diamond : MonoBehaviour
         if (other.gameObject.tag == "Ball")
         {
             AudioManager.instance.audioSource.Play();
+            UIManager.instance.DiamondCounter();
             GameObject part = Instantiate(collectedPart, transform.position, Quaternion.identity) as GameObject;
             Destroy(gameObject);
             Destroy(part, 1f);
