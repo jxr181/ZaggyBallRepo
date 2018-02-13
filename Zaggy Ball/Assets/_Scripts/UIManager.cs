@@ -58,11 +58,16 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         scoreText.text = PlayerPrefs.GetInt("score").ToString();
+        scoreText.enabled = false;
         highScore2.text = PlayerPrefs.GetInt("highScore").ToString();
+        titlePanel.GetComponent<Animator>().Play("titlePanelSlideDown");
         gameOverPanel.SetActive(true);
     }
 
-
+    public void ShowLeaderBoard()
+    {
+        LeaderBoardManager.instance.ShowLeaderBoard();
+    }
 
     public void Reset()
     {

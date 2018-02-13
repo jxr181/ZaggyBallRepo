@@ -8,14 +8,24 @@ using UnityEngine.SocialPlatforms;
 public class LeaderBoardManager : MonoBehaviour
 {
 
+    public static LeaderBoardManager instance;
 
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
 
 
     // Use this for initialization
 
     void Start()
     {
-
+        PlayGamesPlatform.Activate();
+        Login();
 
     }
 
@@ -44,7 +54,13 @@ public class LeaderBoardManager : MonoBehaviour
 
     public void ShowLeaderBoard()
     {
-        // Social.ShowLeaderboardUI();
-        PlayGamesPlatform.Instance.ShowLeaderboardUI(LeaderBoards.leaderboard_top_players);
+        if (Social.localUser.authenticated)
+        {
+            PlayGamesPlatform.Instance.ShowLeaderboardUI(LeaderBoards.leaderboard_top_players); 
+        }
+        else
+        {
+            Login();
+        }
     }
 }
