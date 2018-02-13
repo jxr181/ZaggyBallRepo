@@ -22,6 +22,6 @@ public class AudioManager : MonoBehaviour
 
     public void MuteAudio()
     {
-        AudioListener.pause = !AudioListener.pause;
+        audioSource.mute = !audioSource.mute;
     }
 }

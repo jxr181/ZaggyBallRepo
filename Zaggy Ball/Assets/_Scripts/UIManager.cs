@@ -30,10 +30,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
+    
 
     public void GameStart()
     {
@@ -44,7 +41,7 @@ public class UIManager : MonoBehaviour
     public void UpdateScore()
     {
         score += 1;
-        scoreText.text = score.ToString();
+        scoreText.text = "Score: " + score;
         highScore1.text = PlayerPrefs.GetInt("score").ToString();
 
     }
