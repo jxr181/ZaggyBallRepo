@@ -65,12 +65,17 @@ public class BallController : MonoBehaviour
                 GameManager.instance.GameOver();
             }
 
-            if (Input.GetMouseButtonDown(0) && !gameOver)
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
+                int pointerID = Input.GetTouch(0).fingerId;
 
-                SwitchDirection();
-                ScoreHandler.instance.TrackScore();
-                UIManager.instance.UpdateScore();
+                if (!EventSystem.current.IsPointerOverGameObject(pointerID))
+                {
+
+                    SwitchDirection();
+                    ScoreHandler.instance.TrackScore();
+                    UIManager.instance.UpdateScore(); 
+                }
             } 
         }
 
