@@ -56,10 +56,7 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public void MuteAudio()
-    {
-        AudioListener.pause = !AudioListener.pause;
-    }
+
 
     public void Reset()
     {
