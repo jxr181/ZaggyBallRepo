@@ -39,38 +39,81 @@ public class BallController : MonoBehaviour
 
     public void StartGame()
     {
-        if (!started)
+        if (Application.platform == RuntimePlatform.Android)
         {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            if (!started)
             {
-                int pointerID = Input.GetTouch(0).fingerId;
-
-                if (!EventSystem.current.IsPointerOverGameObject(pointerID))
+                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    rigidbody.velocity = new Vector3(speed, 0, 0);
-                    started = true;
+                    int pointerID = Input.GetTouch(0).fingerId;
 
-                    GameManager.instance.StartGame(); 
+                    if (!EventSystem.current.IsPointerOverGameObject(pointerID))
+                    {
+                        rigidbody.velocity = new Vector3(speed, 0, 0);
+                        started = true;
+
+                        GameManager.instance.StartGame();
+                    }
                 }
             }
+
+            if (!Physics.Raycast(rigidbody.position, Vector3.down, 1f))
+            {
+                Physics.Raycast(rigidbody.position, Vector3.down, 1f);
+                gameOver = true;
+                rigidbody.velocity = new Vector3(0, -25f, 0);
+
+                Camera.main.GetComponent<CameraFollow>().go = true;
+
+                GameManager.instance.GameOver();
+            }
+
+            if (Input.GetMouseButtonDown(0) && !gameOver)
+            {
+
+                SwitchDirection();
+                ScoreHandler.instance.TrackScore();
+                UIManager.instance.UpdateScore();
+            } 
         }
 
-        if (!Physics.Raycast(rigidbody.position, Vector3.down, 1f))
+        else
         {
-            Physics.Raycast(rigidbody.position, Vector3.down, 1f);
-            gameOver = true;
-            rigidbody.velocity = new Vector3(0, -25f, 0);
+            if (!started)
+            {
+                if (Input.GetMouseButtonDown(0) && !gameOver)
+                {
 
-            Camera.main.GetComponent<CameraFollow>().go = true;
+                    if (!EventSystem.current.IsPointerOverGameObject())
+                    {
+                        rigidbody.velocity = new Vector3(speed, 0, 0);
+                        started = true;
 
-            GameManager.instance.GameOver();
-        }
+                        GameManager.instance.StartGame();
+                    }
+                }
+            }
 
-        if (Input.GetMouseButtonDown(0) && !gameOver)
-        {
-            SwitchDirection();
-            ScoreHandler.instance.TrackScore();
-            UIManager.instance.UpdateScore();
+            if (!Physics.Raycast(rigidbody.position, Vector3.down, 1f))
+            {
+                Physics.Raycast(rigidbody.position, Vector3.down, 1f);
+                gameOver = true;
+                rigidbody.velocity = new Vector3(0, -25f, 0);
+
+                Camera.main.GetComponent<CameraFollow>().go = true;
+
+                GameManager.instance.GameOver();
+            }
+
+            if (Input.GetMouseButtonDown(0) && !gameOver)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    SwitchDirection();
+                    ScoreHandler.instance.TrackScore();
+                    UIManager.instance.UpdateScore(); 
+                }
+            }
         }
     }
 
