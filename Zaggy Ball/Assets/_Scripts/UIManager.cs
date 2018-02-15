@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
     public Text highScore2;
     public Text diamondCountText;
 
+    public string ANDROID_RATE_URL = "market://details?id=com.JeomarInteractive.Zaggy_Ball";
+    //public string ANDROID_RATE_NOADS_URL = "market://details?id=com.JeomarInteractive.Zaggy_BallNoAds";
+
+    public string ANDROID_PURCHASE_NOADS_URL = "market://details?id=com.JeomarInteractive.Zaggy_BallNoAds";
 
     public static UIManager instance;
 
@@ -67,6 +71,25 @@ public class UIManager : MonoBehaviour
     public void ShowLeaderBoard()
     {
         LeaderBoardManager.instance.ShowLeaderBoard();
+    }
+
+    public void RateUs()
+    {
+#if UNITY_ANDROID
+        Application.OpenURL(ANDROID_RATE_URL);
+#endif
+
+#if UNITY_ANDROID
+        //Application.OpenURL(ANDROID_RATE_NOADS_URL);
+#endif
+    }
+
+    public void BuyNoAds()
+    {
+#if UNITY_ANDROID
+        Application.OpenURL(ANDROID_PURCHASE_NOADS_URL);
+#endif
+
     }
 
     public void Reset()

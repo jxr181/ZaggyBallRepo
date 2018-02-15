@@ -34,6 +34,7 @@ public class BallController : MonoBehaviour
         StartGame();
     }
 
+    // Starts the game when the screen is tapped the first time and if the game hasn't already started
     public void StartGame()
     {
         if (Application.platform == RuntimePlatform.Android)
@@ -119,6 +120,7 @@ public class BallController : MonoBehaviour
         }
     }
 
+    // Changes the direction of the ball along the X and Z axis
     void SwitchDirection()
     {
         if (rigidbody.velocity.z > 0)

@@ -28,7 +28,7 @@ public class UnityAdManager : MonoBehaviour
 
     void Start () 
 	{
-        if (loadcount % 5 == 0)
+        if (loadcount % 6 == 0)
         {
             ShowAd();
         }

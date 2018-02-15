@@ -29,15 +29,7 @@ public class LeaderBoardManager : MonoBehaviour
 
     }
 
-
-
-    // Update is called once per frame
-
-    void Update()
-    {
-
-
-    }
+    
 
     public void Login()
     {
@@ -47,6 +39,7 @@ public class LeaderBoardManager : MonoBehaviour
         });
     }
 
+    // Adds score from scorehandler to the google play game services leaderboard.
     public void AddScoreToLeaderBoard()
     {
         Social.ReportScore(ScoreHandler.instance.score, LeaderBoards.leaderboard_top_players, (bool success) => { });
